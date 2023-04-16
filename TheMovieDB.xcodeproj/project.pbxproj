@@ -14,6 +14,7 @@
 		7B3A364D29EC2EB700104CC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B3A364C29EC2EB700104CC6 /* Assets.xcassets */; };
 		7B3A365029EC2EB700104CC6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B3A364E29EC2EB700104CC6 /* LaunchScreen.storyboard */; };
 		7B3A365B29EC2EB700104CC6 /* TheMovieDBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3A365A29EC2EB700104CC6 /* TheMovieDBTests.swift */; };
+		7B3A367529EC319700104CC6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7B3A367429EC319700104CC6 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,7 @@
 		7B3A365129EC2EB700104CC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B3A365629EC2EB700104CC6 /* TheMovieDBTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheMovieDBTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B3A365A29EC2EB700104CC6 /* TheMovieDBTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheMovieDBTests.swift; sourceTree = "<group>"; };
+		7B3A367429EC319700104CC6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = TheMovieDB/Resources/README.md; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,7 +86,7 @@
 				7B3A364929EC2EB500104CC6 /* Main.storyboard */,
 				7B3A364C29EC2EB700104CC6 /* Assets.xcassets */,
 				7B3A364E29EC2EB700104CC6 /* LaunchScreen.storyboard */,
-				7B3A365129EC2EB700104CC6 /* Info.plist */,
+				7B3A367329EC317A00104CC6 /* Resources */,
 			);
 			path = TheMovieDB;
 			sourceTree = "<group>";
@@ -95,6 +97,15 @@
 				7B3A365A29EC2EB700104CC6 /* TheMovieDBTests.swift */,
 			);
 			path = TheMovieDBTests;
+			sourceTree = "<group>";
+		};
+		7B3A367329EC317A00104CC6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7B3A367429EC319700104CC6 /* README.md */,
+				7B3A365129EC2EB700104CC6 /* Info.plist */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,6 +191,7 @@
 			files = (
 				7B3A365029EC2EB700104CC6 /* LaunchScreen.storyboard in Resources */,
 				7B3A364D29EC2EB700104CC6 /* Assets.xcassets in Resources */,
+				7B3A367529EC319700104CC6 /* README.md in Resources */,
 				7B3A364B29EC2EB500104CC6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
