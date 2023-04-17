@@ -22,7 +22,7 @@ class MoviesListViewController: UIViewController {
     }
     
     func configureTableView() {
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.registerFromNib(cell: MovieTableViewCell.self)
         tableView.dataSource = self
         tableView.delegate = self
     }
@@ -40,9 +40,9 @@ extension MoviesListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let element = dataSource[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = element.name
-        return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MovieTableViewCell.self), for: indexPath) as? MovieTableViewCell
+        cell?.titleLabel?.text = element.name
+        return cell ?? UITableViewCell()
     }
 }
 
