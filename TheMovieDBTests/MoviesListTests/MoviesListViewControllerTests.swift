@@ -6,10 +6,13 @@
 //
 
 import XCTest
+@testable import TheMovieDB
 
 class MoviesListViewControllerTests: XCTestCase {
-    func test_loadMoviesDB_shouldRenderOnTable() {
-        
+    
+    func test_loadMovies_shouldBeRenderedOnTable() {
+        let viewController = makeSUT()
+         XCTAssertEqual(viewController.tableView.numberOfRows(inSection: 0), 2)
     }
     
     func test_renderingCells_cellsShouldHoldTheCorrectData() {
@@ -19,6 +22,36 @@ class MoviesListViewControllerTests: XCTestCase {
     func test_selectingMovie_shouldMoveFromMoviesList() {
       
     }
+    
+    func makeSUT() -> MoviesListViewController {
+        let presenter = MockingMoviesListPresenter()
+        let viewController = MoviesListViewController(presenter: presenter)
+        presenter.delegate = viewController
+        let _ = viewController.view
+        return viewController
+    }
+}
+
+class MockingMoviesListPresenter: MoviesListPresenterProtocol {
+    var delegate: MoviesListPresenterDelegate?
+ 
+    func movieSelected(row: Int) {
+        
+    }
+}
+
+extension MockingMoviesListPresenter: MoviesListOuput {
+    
+    func viewLoaded() {
+        let movies = [MockedMovieEntity(name: "name1", id: 1, imageUrl: "image-url"), MockedMovieEntity(name: "name2", id: 1, imageUrl: "image-url")]
+        self.delegate?.moviesList(movies)
+    }
+}
+
+private struct MockedMovieEntity: MovieEntity {
+    var name: String
+    var id: Int
+    var imageUrl: String?
 }
 
 
