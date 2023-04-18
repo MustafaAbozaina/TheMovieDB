@@ -9,7 +9,7 @@ import UIKit
 
 extension ViewControllerFactory {
     static func createMoviesListViewController() -> MoviesListViewController {
-        let presenter = MoviesListPresenter()
+        let presenter = MoviesListPresenter(useCases: [])
         let viewController = MoviesListViewController(presenter: presenter)
         
         return viewController

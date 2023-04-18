@@ -17,6 +17,10 @@ protocol MoviesListPresenterProtocol {
 
 class MoviesListPresenter: MoviesListPresenterProtocol, MoviesListEventOuput {
     var delegate: MoviesListPresenterDelegate?
+    var useCases: [any UseCase]
+    init(useCases: [any UseCase]) {
+        self.useCases = useCases
+    }
     
     func viewLoaded() {
         // TODO: fire loading movies API
@@ -28,3 +32,14 @@ class MoviesListPresenter: MoviesListPresenterProtocol, MoviesListEventOuput {
 }
 
 
+extension MoviesListPresenter {
+    var loadMoviesUseCase: (any LoadMoviesUseCase)? {
+        return self.useCases.filter({$0 is (any LoadMoviesUseCase)}).first as? (any LoadMoviesUseCase)
+    }
+    
+    func loadMovies() {
+        loadMoviesUseCase?.start(output: { movies in
+            self.delegate?.moviesList(movies)
+        })
+    }
+}
