@@ -10,7 +10,7 @@ import UIKit
 class MoviesListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     private var dataSource: [MovieEntity] = []
-    var presenter: MoviesListOuput?
+    var presenter: MoviesListEventOuput?
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
@@ -27,7 +27,7 @@ class MoviesListViewController: UIViewController {
         tableView.delegate = self
     }
     
-    convenience init(presenter: MoviesListOuput) {
+    convenience init(presenter: MoviesListEventOuput) {
         self.init()
         self.presenter = presenter
     }
@@ -52,8 +52,9 @@ extension MoviesListViewController: UITableViewDelegate {
     }
 }
 
-protocol MoviesListOuput {
+protocol MoviesListEventOuput {
     func viewLoaded()
+    func movieSelected(row: Int)
 }
 
 extension MoviesListViewController: MoviesListPresenterDelegate {
@@ -61,6 +62,4 @@ extension MoviesListViewController: MoviesListPresenterDelegate {
         self.dataSource = movies
         tableView.reloadData()
     }
-    
-    
 }

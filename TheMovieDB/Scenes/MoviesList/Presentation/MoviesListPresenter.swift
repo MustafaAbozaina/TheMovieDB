@@ -13,6 +13,18 @@ protocol MoviesListPresenterDelegate: AnyObject {
 
 protocol MoviesListPresenterProtocol {
     var delegate: MoviesListPresenterDelegate? {get set}
-    func viewLoaded()
-    func movieSelected(row: Int)
 }
+
+class MoviesListPresenter: MoviesListPresenterProtocol, MoviesListEventOuput {
+    var delegate: MoviesListPresenterDelegate?
+    
+    func viewLoaded() {
+        // TODO: fire loading movies API
+    }
+    
+    func movieSelected(row: Int) {
+        // TODO: Just let the coordinator know
+    }
+}
+
+

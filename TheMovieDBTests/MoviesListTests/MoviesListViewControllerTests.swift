@@ -25,7 +25,7 @@ class MoviesListViewControllerTests: XCTestCase {
     }
     
     func test_selectingMovie_shouldMoveFromMoviesList() {
-      // TODO:
+       
     }
     
     func makeSUT() -> MoviesListViewController {
@@ -45,7 +45,7 @@ class MockingMoviesListPresenter: MoviesListPresenterProtocol {
     }
 }
 
-extension MockingMoviesListPresenter: MoviesListOuput {
+extension MockingMoviesListPresenter: MoviesListEventOuput {
     
     func viewLoaded() {
         let movies = [MockedMovieEntity(name: "name1", id: 1, imageUrl: "image-url"), MockedMovieEntity(name: "name2", id: 1, imageUrl: "image-url")]
