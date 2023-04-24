@@ -12,9 +12,18 @@ protocol LoadMoviesUseCase: UseCase where Input == Void?, Output == ([MovieEntit
 }
 
 class DefaultLoadMoviesUseCase: LoadMoviesUseCase {
+    let loadMoviesRepository: LoadMoviesRepository?
     
-    func start(output: ([MovieEntity]) -> ()) {
-        
+    init(loadMoviesRepository: LoadMoviesRepository?) {
+        self.loadMoviesRepository = loadMoviesRepository
+    }
+    
+    func start(output: @escaping ([MovieEntity]) -> ()) {
+        self.loadMoviesRepository?.load { movies in
+            output(movies)
+        } failure: { error in
+            
+        }
     }
     
 }

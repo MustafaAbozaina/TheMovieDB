@@ -33,7 +33,7 @@ class MoviesListPresenterTests: XCTestCase {
     }
     
     func test_excuteLoadMoviesUseCase_shouldHandleFailure() {
-        
+        //TODO: 
     }
 }
 
@@ -53,7 +53,7 @@ private class MockedPresenterDelegate: MoviesListPresenterDelegate {
     }
 }
 
-private struct MockedMovie: MovieEntity {
+ struct MockedMovie: MovieEntity {
     var name: String
     var id: Int
     var imageUrl: String?
