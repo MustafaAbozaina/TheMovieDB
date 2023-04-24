@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol LoadMoviesUseCase: UseCase where Input == Void?, Output == ([MovieEntity]) -> () {
+protocol LoadMoviesUseCase: UseCase where Input == Void?, Output == ( (_ success: [MovieEntity]?, _ failure: Error?) -> () ) {
     
 }
 
@@ -18,12 +18,11 @@ class DefaultLoadMoviesUseCase: LoadMoviesUseCase {
         self.loadMoviesRepository = loadMoviesRepository
     }
     
-    func start(output: @escaping ([MovieEntity]) -> ()) {
+    func start(output: @escaping ([MovieEntity]?, Error?) -> ()) {
         self.loadMoviesRepository?.load { movies in
-            output(movies)
+            output(movies, nil)
         } failure: { error in
-            
+            output(nil, error)
         }
     }
-    
 }

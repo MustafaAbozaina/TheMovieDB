@@ -31,15 +31,22 @@ class MoviesListPresenter: MoviesListPresenterProtocol, MoviesListEventOuput {
     }
 }
 
-
 extension MoviesListPresenter {
     var loadMoviesUseCase: (any LoadMoviesUseCase)? {
         return self.useCases.filter({$0 is (any LoadMoviesUseCase)}).first as? (any LoadMoviesUseCase)
     }
     
     func loadMovies() {
-        loadMoviesUseCase?.start(output: { movies in
+        loadMoviesUseCase?.start(output: { movies, error  in
+            guard let movies else {
+                self.showError(error)
+                return
+            }
             self.delegate?.moviesList(movies)
         })
+    }
+    
+    func showError(_ error: Error?) {
+        // if let error 
     }
 }

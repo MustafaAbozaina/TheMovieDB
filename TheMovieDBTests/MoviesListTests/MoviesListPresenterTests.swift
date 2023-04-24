@@ -40,9 +40,9 @@ class MoviesListPresenterTests: XCTestCase {
 private class MockedLoadMoviesUseCase: LoadMoviesUseCase {
     var numberOfCalls = 0
     var mockedMovies: [MockedMovie] = []
-    func start(output: ([MovieEntity]) -> ()) {
+    func start(output: ([MovieEntity]?, Error?) -> ()) {
         numberOfCalls += 1
-        output(mockedMovies)
+        output(mockedMovies, nil)
     }
 }
 

@@ -15,18 +15,36 @@ class LoadMoviesUseCaseTests: XCTestCase {
         let loadMoviesRepository = MockedLoadMoviesRepo()
         loadMoviesRepository.movies = []
         let sut = DefaultLoadMoviesUseCase(loadMoviesRepository: loadMoviesRepository)
-        sut.start { movies in
+        sut.start { movies, error  in
             exp.fulfill()
         }
+        waitForExpectations(timeout: 2)
+    }
+    
+    func test_loadingMovies_shouldFail() {
+        let exp = expectation(description: #function)
+        let loadMoviesRepository = MockedLoadMoviesRepo()
+        loadMoviesRepository.error = NSError(domain: "domain", code: 1)
+        let sut = DefaultLoadMoviesUseCase(loadMoviesRepository: loadMoviesRepository)
+        sut.start { movies, error  in
+            if let error {
+                exp.fulfill()
+            }
+        } 
         waitForExpectations(timeout: 2)
     }
 }
 
 private class MockedLoadMoviesRepo: LoadMoviesRepository {
     var movies: [MovieEntity] = []
+    var error: Error?
     func load(success: @escaping ([MovieEntity]) -> (), failure: @escaping (Error) -> ()) {
-        let movieDTO = MockedMovieDTO(name: "movie name", title: "movie title", id: 123, posterImageUrl: "image-url")
-        success([movieDTO])
+        let movieDTO = [MockedMovieDTO(name: "movie name", title: "movie title", id: 123, posterImageUrl: "image-url")]
+        if let error {
+            failure(error)
+        } else {
+            success(movieDTO)
+        }
     }
 }
 
