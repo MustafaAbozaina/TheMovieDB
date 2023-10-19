@@ -1,5 +1,5 @@
 //
-//  MoviesListPresenter.swift
+//  MoviesListPresenterTests.swift
 //  TheMovieDBTests
 //
 //  Created by Mustafa Abozaina on 18/04/2023.
@@ -22,7 +22,7 @@ class MoviesListPresenterTests: XCTestCase {
     func test_excuteLoadMoviestUseCase_shouldDeliverDataToDelegate() {
         let exp = expectation(description: #function)
         let loadMoviesUseCase = MockedLoadMoviesUseCase()
-        loadMoviesUseCase.mockedMovies = [MockedMovie(name: "Spider Man", id: 1), MockedMovie(name: "Black Widow", id: 2)]
+        loadMoviesUseCase.mockedMovies = [MockedMovie(id: 2, name: "Spider Man", overview: "overview1"), MockedMovie(id: 1, name: "super man", overview: "overview2"), MockedMovie(id: 3, name: "Black Widow", overview: "overview2")]
         let sut = MoviesListPresenter(useCases: [loadMoviesUseCase])
         let presenterDelegate = MockedPresenterDelegate()
         sut.delegate = presenterDelegate
@@ -33,7 +33,7 @@ class MoviesListPresenterTests: XCTestCase {
     }
     
     func test_excuteLoadMoviesUseCase_shouldHandleFailure() {
-        //TODO: 
+        //TODO:
     }
 }
 
@@ -53,9 +53,10 @@ private class MockedPresenterDelegate: MoviesListPresenterDelegate {
     }
 }
 
- struct MockedMovie: MovieEntity {
-    var name: String
+struct MockedMovie: MovieEntity {
     var id: Int
+    var name: String
+    var overview: String?
     var imageUrl: String?
 }
 

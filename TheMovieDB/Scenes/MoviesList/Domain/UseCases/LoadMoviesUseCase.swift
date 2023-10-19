@@ -19,7 +19,7 @@ class DefaultLoadMoviesUseCase: LoadMoviesUseCase {
     }
     
     func start(output: @escaping ([MovieEntity]?, Error?) -> ()) {
-        self.loadMoviesRepository?.load { movies in
+        self.loadMoviesRepository?.loadMovies { movies in
             output(movies, nil)
         } failure: { error in
             output(nil, error)

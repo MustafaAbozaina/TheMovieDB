@@ -8,5 +8,5 @@
 import Foundation
 
 protocol LoadMoviesRepository {
-    func load(success: @escaping ([MovieEntity]) -> (), failure: @escaping (Error) -> ())
+    func loadMovies(success: @escaping ([MovieEntity]) -> (), failure: @escaping (Error) -> ())
 }

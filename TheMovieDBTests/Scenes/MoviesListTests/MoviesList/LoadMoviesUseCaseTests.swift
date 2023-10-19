@@ -1,5 +1,5 @@
 //
-//  LoadMoviesTests.swift
+//  LoadMoviesUseCaseTests.swift
 //  TheMovieDBTests
 //
 //  Created by Mustafa Abozaina on 20/04/2023.
@@ -13,7 +13,6 @@ class LoadMoviesUseCaseTests: XCTestCase {
     func test_loadingMovies_shouldSuccess() {
         let exp = expectation(description: #function)
         let loadMoviesRepository = MockedLoadMoviesRepo()
-        loadMoviesRepository.movies = []
         let sut = DefaultLoadMoviesUseCase(loadMoviesRepository: loadMoviesRepository)
         sut.start { movies, error  in
             exp.fulfill()
@@ -27,10 +26,10 @@ class LoadMoviesUseCaseTests: XCTestCase {
         loadMoviesRepository.error = NSError(domain: "domain", code: 1)
         let sut = DefaultLoadMoviesUseCase(loadMoviesRepository: loadMoviesRepository)
         sut.start { movies, error  in
-            if let error {
+            if let _ = error {
                 exp.fulfill()
             }
-        } 
+        }
         waitForExpectations(timeout: 2)
     }
 }
@@ -38,8 +37,9 @@ class LoadMoviesUseCaseTests: XCTestCase {
 private class MockedLoadMoviesRepo: LoadMoviesRepository {
     var movies: [MovieEntity] = []
     var error: Error?
-    func load(success: @escaping ([MovieEntity]) -> (), failure: @escaping (Error) -> ()) {
-        let movieDTO = [MockedMovieDTO(name: "movie name", title: "movie title", id: 123, posterImageUrl: "image-url")]
+    
+    func loadMovies(success: @escaping ([TheMovieDB.MovieEntity]) -> (), failure: @escaping (Error) -> ()) {
+        let movieDTO = [MockedMovieDTO(name: "movie name", overview: "movie overView", id: 123, posterImageUrl: "image-url")]
         if let error {
             failure(error)
         } else {
@@ -51,7 +51,7 @@ private class MockedLoadMoviesRepo: LoadMoviesRepository {
 private struct MockedMovieDTO: MovieEntity {
     var name: String
     var imageUrl: String?
-    var title: String
+    var overview: String?
     var id: Int
     var posterImageUrl: String?
 }

@@ -23,7 +23,9 @@ class MoviesListPresenter: MoviesListPresenterProtocol, MoviesListEventOuput {
     }
     
     func viewLoaded() {
-        // TODO: fire loading movies API
+        loadMoviesUseCase?.start() { [weak self] (movies, error) in
+            self?.delegate?.moviesList(movies ?? [])
+        }
     }
     
     func movieSelected(row: Int) {

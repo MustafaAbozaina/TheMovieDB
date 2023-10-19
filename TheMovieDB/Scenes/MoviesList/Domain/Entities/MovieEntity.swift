@@ -8,13 +8,15 @@
 import Foundation
 
 protocol MovieEntity {
-    var name: String {get set}
     var id: Int {get set}
+    var name: String {get set}
+    var overview: String? {get set}
     var imageUrl: String? {get set}
 }
 
 struct Movie: MovieEntity {
-    var name: String
     var id: Int
+    var name: String
+    var overview: String?
     var imageUrl: String?
 }
