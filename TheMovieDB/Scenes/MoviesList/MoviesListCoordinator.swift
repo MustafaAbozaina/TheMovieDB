@@ -14,7 +14,7 @@ class MoviesListCoordinator: Coordinator {
         self.navigationController = navigationController
     }
     
-    func start() {
+    func start(input: Void? = nil) {
         let moviesListViewController = ViewControllerFactory.createMoviesListViewController()
         self.navigationController.pushViewController(moviesListViewController, animated: false)
     }

@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import SwiftUI
 
 protocol Coordinator {
+    associatedtype Input
     var navigationController: UINavigationController {get set}
-    func start()
+    func start(input: Input)
 }
 
 class AppFlowCoordinator: Coordinator {
@@ -19,14 +21,28 @@ class AppFlowCoordinator: Coordinator {
         self.navigationController = navigationController
     }
     
-    func start() {
-       initalizeHomeScreen()
+    func start(input: (window: UIWindow?, uiType: UIType)) {
+        let window = input.window
+        let uiType = input.uiType
+        var rootViewController: UIViewController?
+        if uiType == .swiftui {
+            rootViewController = UIHostingController(rootView: ViewControllerFactory.createMoviesListSwiftUIView())
+        } else {
+            rootViewController = self.navigationController
+            initalizeHomeScreen()
+        }
+        window?.rootViewController = rootViewController
+        window?.makeKeyAndVisible()
     }
     
     private func initalizeHomeScreen(){
-        // If login
         let moviesListCoordinator = MoviesListCoordinator(navigationController: self.navigationController)
         moviesListCoordinator.start()
+    }
+    
+    enum UIType {
+        case uikit
+        case swiftui
     }
 }
 

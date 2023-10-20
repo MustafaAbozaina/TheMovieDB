@@ -8,16 +8,26 @@
 import UIKit
 
 extension ViewControllerFactory {
-    static func createMoviesListViewController() -> MoviesListViewController {
-       
+    
+    static func createLoadMoviesUseCase() -> any UseCase {
         let loadMoviesRemoteDataSource = createLoadMoviesRemoteDataSource()
         let moviesRepositoryDataSources = [loadMoviesRemoteDataSource]
         let loadMoviesRepo = MoviesRepository(dataSources: moviesRepositoryDataSources)
         let loadMoviesUseCase = DefaultLoadMoviesUseCase(loadMoviesRepository: loadMoviesRepo)
-        let presenter = MoviesListPresenter(useCases: [loadMoviesUseCase])
+        return loadMoviesUseCase
+    }
+    
+    static func createMoviesListViewController() -> MoviesListViewController {
+        let presenter = MoviesListPresenter(useCases: [createLoadMoviesUseCase()])
         let viewController = MoviesListViewController(presenter: presenter, cellsIdentifiers: [String(describing: MovieTableViewCell.self)])
         presenter.delegate = viewController
         return viewController
+    }
+    
+    static func createMoviesListSwiftUIView() -> MoviesListView {
+        let viewModel = MoviesListViewModel(useCases: [createLoadMoviesUseCase()])
+        let rootView = MoviesListView(viewModel: viewModel)
+        return rootView
     }
     
     static func createLoadMoviesRemoteDataSource() -> LoadMoviesRemoteDataSource {
