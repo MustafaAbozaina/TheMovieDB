@@ -23,9 +23,13 @@ Displaying movies remote data on the screen using MVVM-C
  architecture is about responsibilities and how those components talk to each other 
 
     ## Presentation
-    - View: set the data to the view 
+    For UIKit 
+    - View: set the data sent by presenter    
     - ViewController: map the data to the view 
     - Presenter: Handle data comes from UseCases and send to controllers
+    For SwiftUI
+    _ View: Bind the data from ViewModel  
+    - ViewModel: Handle data comes from appropriate use case 
     ## Domain
     - Entity: Business Models
     - UseCase: Business Functions
