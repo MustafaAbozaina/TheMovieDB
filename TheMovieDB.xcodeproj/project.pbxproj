@@ -49,6 +49,7 @@
 		7B9C363B2A0E75340064FD95 /* MoviesDBRootDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9C363A2A0E75340064FD95 /* MoviesDBRootDTO.swift */; };
 		7B9D1D432ADD985200D2096B /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9D1D422ADD985200D2096B /* HTTPClient.swift */; };
 		7B9D1D452ADD985F00D2096B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9D1D442ADD985F00D2096B /* NetworkManager.swift */; };
+		7BB21C622AF51FF6004D0E47 /* ConcurrencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB21C612AF51FF6004D0E47 /* ConcurrencyTests.swift */; };
 		7BC6B7682A0FEE6D00517B0F /* LoadMoviesRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC6B7672A0FEE6D00517B0F /* LoadMoviesRemoteDataSource.swift */; };
 /* End PBXBuildFile section */
 
@@ -107,6 +108,7 @@
 		7B9C363A2A0E75340064FD95 /* MoviesDBRootDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesDBRootDTO.swift; sourceTree = "<group>"; };
 		7B9D1D422ADD985200D2096B /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		7B9D1D442ADD985F00D2096B /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		7BB21C612AF51FF6004D0E47 /* ConcurrencyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrencyTests.swift; sourceTree = "<group>"; };
 		7BC6B7672A0FEE6D00517B0F /* LoadMoviesRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoviesRemoteDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -419,6 +421,7 @@
 			isa = PBXGroup;
 			children = (
 				7B3A367629EC54F600104CC6 /* MoviesListTests */,
+				7BB21C612AF51FF6004D0E47 /* ConcurrencyTests.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -629,6 +632,7 @@
 				7B3A367829EC550B00104CC6 /* MoviesListViewControllerTests.swift in Sources */,
 				7B524D342AE1483B0085F046 /* MoviesListPresenterTests.swift in Sources */,
 				7B524D302AE147E50085F046 /* LoadMoviesUseCaseTests.swift in Sources */,
+				7BB21C622AF51FF6004D0E47 /* ConcurrencyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
