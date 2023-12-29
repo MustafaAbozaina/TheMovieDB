@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import Kingfisher
-
 
 class MovieTableViewCell: UITableViewCell {
     static let cellIdentifier = "MovieTableViewCell"
@@ -34,8 +32,7 @@ extension MovieTableViewCell: TitleSubtitleImageCell {
     var imagePath: String? {
         get {return nil}
         set {
-            let imageUrl = URL(string: newValue ?? "")
-            posterImageView.kf.setImage(with: imageUrl, placeholder: UIImage(systemName: "square.fill"))
+            posterImageView.setRemoteImage(newValue, placeHolder: UIImage(systemName: "square.fill"))
         }
     }
 }

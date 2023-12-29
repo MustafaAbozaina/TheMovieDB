@@ -7,15 +7,25 @@
 
 import UIKit
 
-class MoviesListCoordinator: Coordinator {
+class DefaultMoviesListCoordinator: MoviesListCoordinator {
     var navigationController: UINavigationController
-    
-    init(navigationController: UINavigationController) {
+    let moviesListFactory: MoviesListFactory
+    init(navigationController: UINavigationController, moviesListFactory: MoviesListFactory) {
         self.navigationController = navigationController
+        self.moviesListFactory = moviesListFactory
     }
     
     func start(input: Void? = nil) {
-        let moviesListViewController = ViewControllerFactory.createMoviesListViewController()
-        self.navigationController.pushViewController(moviesListViewController, animated: false)
+        let moviesListViewController = moviesListFactory.createMoviesListViewController(coordinator: self)
+        self.navigationController.pushViewController(moviesListViewController, animated: true)
     }
+    
+    func movieSelected(id: Int) {
+        let movieDetailsCoordinator = MovieDetailsCoordinator(navigationController: navigationController, movieDetailsFactory: ModuleFactory())
+        movieDetailsCoordinator.start(input: id)
+    }
+}
+
+protocol MoviesListCoordinator: Coordinator {
+    func movieSelected(id: Int)
 }

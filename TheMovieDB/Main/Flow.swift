@@ -25,8 +25,8 @@ class AppFlowCoordinator: Coordinator {
         let window = input.window
         let uiType = input.uiType
         var rootViewController: UIViewController?
-        if uiType == .swiftui {
-            rootViewController = UIHostingController(rootView: ViewControllerFactory.createMoviesListSwiftUIView())
+        if uiType == .swiftUI {
+            rootViewController = UIHostingController(rootView: ModuleFactory().createMoviesListSwiftUIView())
         } else {
             rootViewController = self.navigationController
             initalizeHomeScreen()
@@ -35,14 +35,14 @@ class AppFlowCoordinator: Coordinator {
         window?.makeKeyAndVisible()
     }
     
-    private func initalizeHomeScreen(){
-        let moviesListCoordinator = MoviesListCoordinator(navigationController: self.navigationController)
+    private func initalizeHomeScreen() {
+        let moviesListCoordinator = DefaultMoviesListCoordinator(navigationController: self.navigationController, moviesListFactory: ModuleFactory())
         moviesListCoordinator.start()
     }
     
     enum UIType {
-        case uikit
-        case swiftui
+        case uiKit
+        case swiftUI
     }
 }
 

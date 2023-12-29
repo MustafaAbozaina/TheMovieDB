@@ -18,18 +18,22 @@ protocol MoviesListPresenterProtocol {
 class MoviesListPresenter: MoviesListPresenterProtocol, MoviesListEventOuput {
     var delegate: MoviesListPresenterDelegate?
     var useCases: [any UseCase]
-    init(useCases: [any UseCase]) {
+    var coordinator: any MoviesListCoordinator
+    private var movies: [MovieEntity] = []
+    init(useCases: [any UseCase], coordinator: any MoviesListCoordinator) {
         self.useCases = useCases
+        self.coordinator = coordinator
     }
     
     func viewLoaded() {
         loadMoviesUseCase?.start() { [weak self] (movies, error) in
+            self?.movies = movies ?? []
             self?.delegate?.moviesList(movies ?? [])
         }
     }
     
     func movieSelected(row: Int) {
-        // TODO: Just let the coordinator know
+        self.coordinator.movieSelected(id: movies[row].id)
     }
 }
 

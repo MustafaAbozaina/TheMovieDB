@@ -42,9 +42,9 @@ class NetworkManager: Network {
                                                           failure: (NetworkFailure<F>)-> Void) {
         var statusCodeFailed = false
         
-        debugPrint("api call response for \(response)")
+        debugPrint("api call response for \(String(describing: response))")
         if let data = data, let responseBody = String(data: data, encoding: .utf8) {
-            print("Response Body: \(responseBody)")
+            debugPrint("Response Body: \(responseBody)")
         }
         guard let data = data, let response = response else {
             failure(.init(failureModel: nil, error: .responseFailure(nil), stausCode: response?.statusCode ))

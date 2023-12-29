@@ -58,7 +58,7 @@ extension MoviesListViewController: UITableViewDataSource {
 //MARK: TableView Delegates
 extension MoviesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO: call coordinator of the Movie details
+        presenter?.movieSelected(row: indexPath.row)
     }
 }
 

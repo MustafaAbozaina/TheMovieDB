@@ -16,8 +16,8 @@ class MoviesRepository: Repository {
 }
 
 extension MoviesRepository: LoadMoviesRepository {
-    typealias ResponseObject = String?
-    func loadMovies(success: @escaping ([MovieEntity]) -> (), failure: @escaping (Error) -> ()) {
+    typealias ResponseObject = [MovieEntity]
+    func loadMovies(success: @escaping (ResponseObject) -> (), failure: @escaping (Error) -> ()) {
         loadMoviesRemoteDataSource?.start(success: { response in
             if let movies = response as? MoviesDBRootDTO<[MovieDTO]> {
                 success(movies.results?.map({$0.toEntity()}) ?? [])
