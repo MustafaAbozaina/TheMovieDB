@@ -14,9 +14,11 @@ protocol Network {
 class NetworkManager: Network {
     
     let httpClient: HTTPClient
+    let baseUrl: String
     
-    init(httpClient: HTTPClient) {
+    init(httpClient: HTTPClient, baseUrl: String = "https://api.themoviedb.org/3/movie/") {
         self.httpClient = httpClient
+        self.baseUrl = baseUrl
     }
     
     func load<SuccessModel: Decodable, FailureModel: Decodable>(urlPath: String,
@@ -26,7 +28,7 @@ class NetworkManager: Network {
                                                                 success: @escaping (SuccessModel) -> (),
                                                                 failure: @escaping (NetworkFailure<FailureModel>) -> ()) {
         
-        self.httpClient.request(urlPath: urlPath, httpMethod: httpMethod, parameters: parameters, headers: headers) { result in
+        self.httpClient.request(urlPath: baseUrl + urlPath, httpMethod: httpMethod, parameters: parameters, headers: headers) { result in
             switch result {
             case .success(let successModel):
                 self.handleResult(data: successModel.0, response: successModel.1 as? HTTPURLResponse, success: success, failure: failure)

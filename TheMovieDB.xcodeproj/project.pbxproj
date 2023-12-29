@@ -156,11 +156,11 @@
 		7B199FB62B3B67F0001540F3 /* MovieDetails */ = {
 			isa = PBXGroup;
 			children = (
+				7B199FB72B3B68B0001540F3 /* VCFactory+MovieDetails.swift */,
+				7B199FB92B3B68C4001540F3 /* MovieDetailsCoordinator.swift */,
 				7B199FBD2B3B8176001540F3 /* Data */,
 				7B199FBC2B3B8171001540F3 /* Domain */,
 				7B199FBB2B3B8160001540F3 /* Presentation */,
-				7B199FB72B3B68B0001540F3 /* VCFactory+MovieDetails.swift */,
-				7B199FB92B3B68C4001540F3 /* MovieDetailsCoordinator.swift */,
 			);
 			path = MovieDetails;
 			sourceTree = "<group>";

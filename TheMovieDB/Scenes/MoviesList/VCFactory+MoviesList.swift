@@ -32,12 +32,12 @@ extension ModuleFactory: MoviesListFactory {
     
     private func createLoadMoviesRemoteDataSource() -> LoadMoviesRemoteDataSource {
         let httpClient = URLSession.shared
-        let popularMovies = "https://api.themoviedb.org/3/movie/popular"
+        let endpoint = "popular"
         let parameters = ["page":1,
                           "include_adult": false,
                           "sort_by": "popularity.desc"] as [String : Any]
         return LoadMoviesRemoteDataSource(network: NetworkManager(httpClient: httpClient),
-                                   urlPath: popularMovies,
+                                   urlPath: endpoint,
                                           parameters: parameters,
                                    headers: createApiHeaders(),
                                    httpMethod: .get

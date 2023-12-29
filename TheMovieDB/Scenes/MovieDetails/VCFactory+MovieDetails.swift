@@ -11,7 +11,6 @@ protocol MovieDetailsFactory {
     func createMovieDetailsScene(movieId: Int) -> UIViewController
 }
 
-
 extension ModuleFactory: MovieDetailsFactory {
     func createMovieDetailsScene(movieId: Int) -> UIViewController {
         let loadMoviesDetailsUseCase = createLoadMovieDetailsUseCase(movieId: movieId)
@@ -30,10 +29,10 @@ extension ModuleFactory: MovieDetailsFactory {
     
     private func createLoadMovieDetailsRemoteDataSource(movieId: Int) -> LoadMovieDetailsRemoteDataSource {
         let httpClient = URLSession.shared
-        let movieDetails = "https://api.themoviedb.org/3/movie/\(movieId)"
+        let endpoint = "\(movieId)"
         let parameters: [String: Any]? = nil
         return LoadMovieDetailsRemoteDataSource(network: NetworkManager(httpClient: httpClient),
-                                   urlPath: movieDetails,
+                                   urlPath: endpoint,
                                           parameters: parameters,
                                    headers: createApiHeaders(),
                                    httpMethod: .get
