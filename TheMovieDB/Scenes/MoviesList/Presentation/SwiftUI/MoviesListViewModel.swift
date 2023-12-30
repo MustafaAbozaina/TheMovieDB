@@ -10,6 +10,8 @@ import Foundation
 class MoviesListViewModel: ObservableObject {
     @Published var movies: [MovieEntity] = []
     
+//    var movieSelected: (Int) -> ()
+    
     var useCases: [any UseCase]
     init(useCases: [any UseCase]) {
         self.useCases = useCases
@@ -18,11 +20,15 @@ class MoviesListViewModel: ObservableObject {
     func viewAppeared() {
         loadMoviesUseCase?.start() { [weak self] (movies, error) in
             DispatchQueue.main.async {
-                self?.movies = movies ?? []
+                self?.movies = (movies as? [Movie]) ?? []
             }
         }
     }
     
+
+}
+
+extension MoviesListViewModel {
     var loadMoviesUseCase: (any LoadMoviesUseCase)? {
         return self.useCases.filter({$0 is (any LoadMoviesUseCase)}).first as? (any LoadMoviesUseCase)
     }

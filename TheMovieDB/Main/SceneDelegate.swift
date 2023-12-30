@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
 
         appFlowCoordinator = AppFlowCoordinator(navigationController: navController)
-        appFlowCoordinator?.start(input: (window, .uiKit))
+        appFlowCoordinator?.start(input: (window, .swiftUI))
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

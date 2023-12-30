@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 class MovieDetailsViewModel {
     let useCases: [any UseCase]
     var completionResult: ((MovieDetailsEntity) -> ()) = {_ in}

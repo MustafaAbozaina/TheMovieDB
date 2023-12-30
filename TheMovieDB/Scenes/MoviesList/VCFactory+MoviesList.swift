@@ -24,10 +24,11 @@ extension ModuleFactory: MoviesListFactory {
         return viewController
     }
     
-      func createMoviesListSwiftUIView() -> MoviesListView {
-        let viewModel = MoviesListViewModel(useCases: [createLoadMoviesUseCase()])
-        let rootView = MoviesListView(viewModel: viewModel)
-        return rootView
+      func createMoviesListSwiftUIView() -> RootNavigationStack<MoviesListView> {
+          let viewModel = MoviesListViewModel(useCases: [createLoadMoviesUseCase()])
+          let rootView = MoviesListView(viewModel: viewModel, movieDetailsFactory: self)
+          let mainNavigationStack = RootNavigationStack(rootView: rootView)
+        return mainNavigationStack
     }
     
     private func createLoadMoviesRemoteDataSource() -> LoadMoviesRemoteDataSource {
@@ -47,5 +48,9 @@ extension ModuleFactory: MoviesListFactory {
 
 protocol MoviesListFactory {
     func createMoviesListViewController(coordinator: any MoviesListCoordinator) -> UIViewController
-    func createMoviesListSwiftUIView() -> MoviesListView
+    func createMoviesListSwiftUIView() -> RootNavigationStack<MoviesListView>
+}
+
+protocol SwiftUICoordinator {
+    
 }
