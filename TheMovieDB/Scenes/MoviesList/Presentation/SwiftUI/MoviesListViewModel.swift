@@ -9,15 +9,13 @@ import Foundation
 
 class MoviesListViewModel: ObservableObject {
     @Published var movies: [MovieEntity] = []
-    
-//    var movieSelected: (Int) -> ()
-    
+        
     var useCases: [any UseCase]
     init(useCases: [any UseCase]) {
         self.useCases = useCases
     }
     
-    func viewAppeared() {
+    func viewLoaded() {
         loadMoviesUseCase?.start() { [weak self] (movies, error) in
             DispatchQueue.main.async {
                 self?.movies = (movies as? [Movie]) ?? []

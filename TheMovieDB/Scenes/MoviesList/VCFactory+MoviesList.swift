@@ -18,17 +18,17 @@ extension ModuleFactory: MoviesListFactory {
     }
     
     func createMoviesListViewController(coordinator: any MoviesListCoordinator) -> UIViewController {
-         let presenter = MoviesListPresenter(useCases: [createLoadMoviesUseCase()], coordinator: coordinator)
+        let presenter = MoviesListPresenter(useCases: [createLoadMoviesUseCase()], coordinator: coordinator)
         let viewController = MoviesListViewController(presenter: presenter, cellsIdentifiers: [String(describing: MovieTableViewCell.self)])
         presenter.delegate = viewController
         return viewController
     }
-    
-      func createMoviesListSwiftUIView() -> RootNavigationStack<MoviesListView> {
-          let viewModel = MoviesListViewModel(useCases: [createLoadMoviesUseCase()])
-          let rootView = MoviesListView(viewModel: viewModel, movieDetailsFactory: self)
-          let mainNavigationStack = RootNavigationStack(rootView: rootView)
-        return mainNavigationStack
+
+    func createMoviesListSwiftUIView() -> RootNavigationStack<MoviesListView> {
+        let viewModel = MoviesListViewModel(useCases: [createLoadMoviesUseCase()])
+        let rootView = MoviesListView(viewModel: viewModel)
+        let rootNavigationStack = RootNavigationStack(rootView: rootView, router: Router())
+        return rootNavigationStack
     }
     
     private func createLoadMoviesRemoteDataSource() -> LoadMoviesRemoteDataSource {
@@ -38,10 +38,10 @@ extension ModuleFactory: MoviesListFactory {
                           "include_adult": false,
                           "sort_by": "popularity.desc"] as [String : Any]
         return LoadMoviesRemoteDataSource(network: NetworkManager(httpClient: httpClient),
-                                   urlPath: endpoint,
+                                          urlPath: endpoint,
                                           parameters: parameters,
-                                   headers: createApiHeaders(),
-                                   httpMethod: .get
+                                          headers: createApiHeaders(),
+                                          httpMethod: .get
         )
     }
 }

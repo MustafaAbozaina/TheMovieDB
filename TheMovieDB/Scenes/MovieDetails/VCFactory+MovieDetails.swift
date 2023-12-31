@@ -10,13 +10,14 @@ import SwiftUI
 
 protocol MovieDetailsFactory {
     func createMovieDetailsScene(movieId: Int) -> UIViewController
-    func createMovieDetailsSwiftUIScene(movieId: Int) -> MovieDetailsSwiftUIViewModel
+    func createMovieDetailsSwiftUIScene(movieId: Int) -> MovieDetailsSwiftUIView 
 }
 
 extension ModuleFactory: MovieDetailsFactory {
-    func createMovieDetailsSwiftUIScene(movieId: Int) -> MovieDetailsSwiftUIViewModel {
+    func createMovieDetailsSwiftUIScene(movieId: Int) -> MovieDetailsSwiftUIView {
         let useCase = createLoadMovieDetailsUseCase(movieId: movieId)
-        return MovieDetailsSwiftUIViewModel(useCases: [useCase])
+        let viewModel = MovieDetailsSwiftUIViewModel(useCases: [useCase])
+        return MovieDetailsSwiftUIView(viewModel: viewModel)
     }
     
     func createMovieDetailsScene(movieId: Int) -> UIViewController {

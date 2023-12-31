@@ -9,38 +9,29 @@ import SwiftUI
 
 struct MoviesListView: View {
     @ObservedObject var viewModel: MoviesListViewModel
-    var movieDetailsFactory: MovieDetailsFactory
+    @EnvironmentObject var router: Router
     
-    init(viewModel: MoviesListViewModel, movieDetailsFactory: MovieDetailsFactory) {
+    init(viewModel: MoviesListViewModel) {
         self.viewModel = viewModel
-        self.movieDetailsFactory = movieDetailsFactory
+        viewModel.viewLoaded()
     }
     
     var body: some View {
-            List(viewModel.movies, id: \.id) { movie in
-                ZStack {
-                    MovieCardView(movieEntity: movie)
-                    NavigationLink(value: movie.id) {
-                        EmptyView()
+        List(viewModel.movies, id: \.id) { movie in
+            ZStack {
+                MovieCardView(movieEntity: movie)
+                    .onTapGesture {
+                        router.navigate(from: .moviesList(movie.id))
                     }
-                }
             }
-            .navigationDestination(for: Int.self, destination: { movieId in
-                // Should add here something like (cellMovieSelected)
-                let viewModel = movieDetailsFactory.createMovieDetailsSwiftUIScene(movieId: movieId)
-                MovieDetailsSwiftUIView(viewModel: viewModel)
-            }).buttonStyle(.plain)
-            .listStyle(.plain)
-            .onAppear {
-                viewModel.viewAppeared()
-            }
-            .navigationBarTitle("Popular movies")
         }
+        .listStyle(.plain)
+        .navigationBarTitle("Popular movies")
+    }
 }
 
 struct MoviesListView_Previews: PreviewProvider {
     static var previews: some View {
-        MoviesListView(viewModel: MoviesListViewModel(useCases: []), movieDetailsFactory: ModuleFactory())
+        MoviesListView(viewModel: MoviesListViewModel(useCases: []))
     }
 }
-
