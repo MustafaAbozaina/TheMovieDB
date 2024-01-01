@@ -12,7 +12,7 @@ class MoviesListPresenterTests: XCTestCase {
     
     func test_excuteLoadMoviesUseCase_shouldCallTheUseCase() {
         let loadMoviesUseCase = MockedLoadMoviesUseCase()
-        let sut = MoviesListPresenter(useCases: [loadMoviesUseCase])
+        let sut = MoviesListPresenter(useCases: [loadMoviesUseCase], coordinator: MockedCoordinator())
         
         sut.loadMovies()
         
@@ -23,7 +23,7 @@ class MoviesListPresenterTests: XCTestCase {
         let exp = expectation(description: #function)
         let loadMoviesUseCase = MockedLoadMoviesUseCase()
         loadMoviesUseCase.mockedMovies = [MockedMovie(id: 2, name: "Spider Man", overview: "overview1"), MockedMovie(id: 1, name: "super man", overview: "overview2"), MockedMovie(id: 3, name: "Black Widow", overview: "overview2")]
-        let sut = MoviesListPresenter(useCases: [loadMoviesUseCase])
+        let sut = MoviesListPresenter(useCases: [loadMoviesUseCase], coordinator: MockedCoordinator())
         let presenterDelegate = MockedPresenterDelegate()
         sut.delegate = presenterDelegate
         presenterDelegate.exp = exp
@@ -58,6 +58,19 @@ struct MockedMovie: MovieEntity {
     var name: String
     var overview: String?
     var imageUrl: String?
+}
+
+private class MockedCoordinator: MoviesListCoordinator {
+    var navigationController: UINavigationController
+    init(navigationController: UINavigationController = UINavigationController()) {
+        self.navigationController = navigationController
+    }
+}
+
+private extension MoviesListCoordinator  {
+    func start(input: Void?) {}
+    func movieSelected(id: Int) {
+    }
 }
 
 // Presenter functionalities
