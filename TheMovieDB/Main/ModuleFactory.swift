@@ -14,6 +14,3 @@ class ModuleFactory {
                 "accept": "application/json"]
     }
 }
-
-
-

@@ -9,9 +9,17 @@ import UIKit
 
 class MoviesListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
+    
     private var dataSource: [MovieEntity] = []
     var cellsIdentifiers: [String] = []
     var presenter: MoviesListEventOuput?
+    
+    convenience init(presenter: MoviesListEventOuput, cellsIdentifiers: [String]) {
+        self.init()
+        self.presenter = presenter
+        self.cellsIdentifiers = cellsIdentifiers
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
@@ -30,12 +38,6 @@ class MoviesListViewController: UIViewController {
         }
         tableView.dataSource = self
         tableView.delegate = self
-    }
-    
-    convenience init(presenter: MoviesListEventOuput, cellsIdentifiers: [String]) {
-        self.init()
-        self.presenter = presenter
-        self.cellsIdentifiers = cellsIdentifiers
     }
 }
 

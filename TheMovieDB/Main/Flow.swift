@@ -23,7 +23,7 @@ class AppFlowCoordinator: Coordinator {
     
     func start(input: UIWindow?) {
         let window = input
-        let rootViewController = initalizeHomeViewControllerScreen(uiType: .swiftUI)
+        let rootViewController = initalizeHomeViewControllerScreen(uiType: .uiKit)
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
     }

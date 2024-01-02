@@ -9,8 +9,8 @@ import Foundation
 
 class MoviesListViewModel: ObservableObject {
     @Published var movies: [MovieEntity] = []
-        
     var useCases: [any UseCase]
+    
     init(useCases: [any UseCase]) {
         self.useCases = useCases
     }
@@ -22,8 +22,6 @@ class MoviesListViewModel: ObservableObject {
             }
         }
     }
-    
-
 }
 
 extension MoviesListViewModel {

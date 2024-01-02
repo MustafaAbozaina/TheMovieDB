@@ -20,6 +20,7 @@ class MoviesListPresenter: MoviesListPresenterProtocol, MoviesListEventOuput {
     var useCases: [any UseCase]
     var coordinator: any MoviesListCoordinator
     private var movies: [MovieEntity] = []
+    
     init(useCases: [any UseCase], coordinator: any MoviesListCoordinator) {
         self.useCases = useCases
         self.coordinator = coordinator

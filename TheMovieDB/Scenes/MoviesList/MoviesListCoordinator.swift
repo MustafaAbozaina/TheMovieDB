@@ -10,6 +10,7 @@ import UIKit
 class DefaultMoviesListCoordinator: MoviesListCoordinator {
     var navigationController: UINavigationController
     let moviesListFactory: MoviesListFactory
+    
     init(navigationController: UINavigationController, moviesListFactory: MoviesListFactory) {
         self.navigationController = navigationController
         self.moviesListFactory = moviesListFactory

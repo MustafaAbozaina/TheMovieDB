@@ -15,17 +15,19 @@ final class MoviesListSnapshotTests: XCTestCase {
     func test_moviesListViewControllerSuccessState() {
         let exp = expectation(description: #function)
         let moviesListPresenter = MockedMoviesListPresenter()
+        let moviesCellsIdentifier = [String(describing: MovieTableViewCell.self)]
         let viewController = MoviesListViewController(presenter: moviesListPresenter,
-                                                      cellsIdentifiers: [String(describing: MovieTableViewCell.self)])
+                                                      cellsIdentifiers: moviesCellsIdentifier)
         moviesListPresenter.delegate = viewController
         viewController.loadViewIfNeeded()
         moviesListPresenter.viewLoaded()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+
+        let timeToRender: TimeInterval = 1
+        DispatchQueue.main.asyncAfter(deadline: .now() + timeToRender) {
             self.verifyViewController(viewController, named: "UIKit")
             exp.fulfill()
         }
-        wait(for: [exp], timeout: 2)
+        wait(for: [exp], timeout: timeToRender + 1)
     }
     
     func test_moviesListSwiftUIView() {
@@ -34,12 +36,13 @@ final class MoviesListSnapshotTests: XCTestCase {
         let moviesListView = MoviesListView(viewModel: viewModel)
         viewModel.movies = buildMockedMoviesList()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            assertSnapshot(of: moviesListView, as: .image)
+        let timeToRender: TimeInterval = 1
+        DispatchQueue.main.asyncAfter(deadline: .now() + timeToRender) {
+            assertSnapshot(of: moviesListView, as: .image, named: "SwiftUI", testName: "MoviesList")
             exp.fulfill()
         }
         
-        wait(for: [exp], timeout: 2)
+        wait(for: [exp], timeout: timeToRender + timeToRender + 1)
     }
     
     private func verifyViewController(_ viewController: UIViewController, named: String) {
@@ -47,7 +50,6 @@ final class MoviesListSnapshotTests: XCTestCase {
                                                   "iPhone8": .iPhone8,
                                                   "iPhoneSe": .iPhoneSe,
                                                   "iPhone13ProMax": .iPhone13ProMax]
-        
         let results = devices.map { device in
             verifySnapshot(matching: viewController,
                            as: .image(on: device.value),
