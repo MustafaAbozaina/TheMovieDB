@@ -12,11 +12,9 @@ struct RootModel<D: Codable>: Codable {
     let data: D
 }
 
-
 class MockedDTO: Decodable {}
 
 struct MockedNetworkFailureModel: Decodable {}
-
 
 func getValidJsonData() -> Data? {
     let dummyJson = ["key": "value"]
@@ -42,5 +40,3 @@ struct GeneralTestingJson: Codable {
     var subTitle: String?
     var url: String?
 }
-
-

@@ -8,7 +8,6 @@
 import Foundation
 
 protocol LoadMoviesUseCase: UseCase where Input == Void?, Output == ( (_ success: [MovieEntity]?, _ failure: Error?) -> () ) {
-    
 }
 
 class DefaultLoadMoviesUseCase: LoadMoviesUseCase {
