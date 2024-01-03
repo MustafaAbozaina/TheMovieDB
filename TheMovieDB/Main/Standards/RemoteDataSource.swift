@@ -7,8 +7,8 @@
 
 import Foundation
 
-protocol RemoteDataSource:  DataSource {
+protocol RemoteDataSource: DataSource {
     associatedtype ResponseObject
-    func start(success: @escaping (_ a: ResponseObject) -> (), failure: @escaping (_ error: Error?) -> ())
+    func start(success: @escaping (_ responseDTO: ResponseObject) -> (), failure: @escaping (_ error: Error?) -> ())
 }
 

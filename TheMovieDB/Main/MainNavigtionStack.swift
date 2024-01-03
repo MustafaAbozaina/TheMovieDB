@@ -33,7 +33,7 @@ final class Router: ObservableObject {
     }
     
     func navigateBack() {
-        guard navPath.count >  0 else {return}
+        guard navPath.count > 0 else {return}
         navPath.removeLast()
     }
     

@@ -34,7 +34,7 @@ class AppFlowCoordinator: Coordinator {
             rootViewController = UIHostingController(rootView: ModuleFactory().createMoviesListSwiftUIView())
         } else {
             rootViewController = self.navigationController
-            let moviesListCoordinator = DefaultMoviesListCoordinator(navigationController: self.navigationController, moviesListFactory: ModuleFactory())
+            let moviesListCoordinator = DefaultMoviesListCoordinator(navigationController: self.navigationController, moviesListFactory: ModuleFactory(), movieSelected: navigateToMovieDetails)
             moviesListCoordinator.start()
         }
       return rootViewController
@@ -46,3 +46,9 @@ class AppFlowCoordinator: Coordinator {
     }
 }
 
+extension AppFlowCoordinator {
+    func navigateToMovieDetails(id: Int) {
+        let movieDetailsCoordinator = MovieDetailsCoordinator(navigationController: self.navigationController, movieDetailsFactory: ModuleFactory())
+        movieDetailsCoordinator.start(input: id)
+    }
+}

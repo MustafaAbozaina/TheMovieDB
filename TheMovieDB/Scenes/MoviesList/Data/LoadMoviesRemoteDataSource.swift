@@ -29,17 +29,13 @@ class LoadMoviesRemoteDataSource: RemoteDataSource {
         self.httpMethod = httpMethod
     }
     
-    func start(success: @escaping (MoviesDBRootDTO<[MovieDTO]>) -> (), failure: @escaping (Error?) -> ()) {
+    func start(success: @escaping (ResponseObject) -> (), failure: @escaping (Error?) -> ()) {
         network.load(urlPath: urlPath, httpMethod: httpMethod, parameters: parameters, headers: headers) { (moviesRoot: MoviesDBRootDTO<[MovieDTO]>?) in
             if let moviesRoot {
                 success(moviesRoot)
             }
-        } failure: { (networkFailure: NetworkFailure<NoType>) in
+        } failure: { (networkFailure: NetworkFailure<PlaceholderModel>) in
             failure(networkFailure.error)
         }
     }
-}
-
-struct NoType: Decodable {
-    
 }

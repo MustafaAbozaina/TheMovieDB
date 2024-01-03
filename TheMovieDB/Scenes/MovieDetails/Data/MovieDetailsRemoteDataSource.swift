@@ -34,7 +34,7 @@ class LoadMovieDetailsRemoteDataSource: RemoteDataSource {
             if let movieDetails {
                 success(movieDetails)
             }
-        } failure: { (networkFailure: NetworkFailure<NoType>) in
+        } failure: { (networkFailure: NetworkFailure<PlaceholderModel>) in
             failure(networkFailure.error)
         }
     }

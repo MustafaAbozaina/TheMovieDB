@@ -10,10 +10,12 @@ import UIKit
 class DefaultMoviesListCoordinator: MoviesListCoordinator {
     var navigationController: UINavigationController
     let moviesListFactory: MoviesListFactory
+    var movieSelectedAction: ((_ id: Int) -> ())?
     
-    init(navigationController: UINavigationController, moviesListFactory: MoviesListFactory) {
+    init(navigationController: UINavigationController, moviesListFactory: MoviesListFactory, movieSelected: ((_ id: Int) -> ())? = nil ) {
         self.navigationController = navigationController
         self.moviesListFactory = moviesListFactory
+        movieSelectedAction = movieSelected
     }
     
     func start(input: Void? = nil) {
@@ -22,8 +24,7 @@ class DefaultMoviesListCoordinator: MoviesListCoordinator {
     }
     
     func movieSelected(id: Int) {
-        let movieDetailsCoordinator = MovieDetailsCoordinator(navigationController: navigationController, movieDetailsFactory: ModuleFactory())
-        movieDetailsCoordinator.start(input: id)
+        self.movieSelectedAction?(id)
     }
 }
 
