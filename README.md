@@ -1,45 +1,76 @@
-# TheMovieDB
-<Task Summary>: We need to request movies remote Info and display on Screen
-- note: check the file of the task 
+# 🎬 TheMovieDB
 
-Displaying movies remote data on the screen using MVVM-C
-# Task Analysis
-- Depending on the task requirments I find that we have 3 main parts that's required 
-    - Presentation: To map UI data on screen
-    - Domain: To Achieve the business rules required 
-    - Data: To handle the dealing with data
-    - Navigations required    
-    
-<Applied architecture design pattern>: I'm finding the MVX-C is a suitable design pattern because:-
-    - Presenter/ViewModel: Great In handling Presentation and business logic
-    - Make the project more easier to be tested and flexible 
-    - Separating navigation in a coordinator leverage the flexibility of reusing views 
-    
-=> I prefer to use Presenter for this project over ViewModel. I don't need binding and I need more clear separation of concerns making the viewController totally agnostic about what's going on
-=> I'm also going to Implement the ViewModel case  
-    
+### 📝 Task Summary
+Build an iOS app that fetches remote movie data and displays it on the screen using a clean and modular architecture.
 
-# Architecture (Layers) 
- architecture is about responsibilities and how those components talk to each other 
+> 📄 _Refer to the task file for more details_
 
-    ## Presentation
-    For UIKit 
-    - View: set the data sent by presenter    
-    - ViewController: map the data to the view 
-    - Presenter: Handle data comes from UseCases and send to controllers
-    For SwiftUI
-    _ View: Bind the data from ViewModel  
-    - ViewModel: Handle data comes from appropriate use case 
-    ## Domain
-    - Entity: Business Models
-    - UseCase: Business Functions
-    - Repositories Contracts: Required Data from repo (dependency inversion) 
-    ## Data
-    - Repository:  
-    - RemoteDataSource: responsible for fetching data from remote  
-    ## Network
-    - NetworkManager: map remote data to DTO object 
-    - SessionClient: request remote data using Rest Methods 
-     
+---
 
- 
+### 🧠 Task Analysis
+
+Based on the task requirements, the architecture is broken down into the following major components:
+
+- **Presentation**: Responsible for preparing and displaying data on the UI.
+- **Domain**: Implements business rules and application logic.
+- **Data**: Handles data fetching, parsing, and persistence.
+- **Navigation**: Manages app flow using the Coordinator pattern.
+
+---
+
+### 🏗️ Applied Architecture Pattern: MVX-C (MVP/MVVM + Coordinator)
+
+After evaluating the requirements, I found **MVX-C** (MVVM or MVP + Coordinator) to be a suitable pattern due to:
+
+- **Presenter / ViewModel**: Effectively separates presentation logic from UI.
+- **Testability**: Makes the app easier to unit test and maintain.
+- **Coordinator Pattern**: Decouples navigation logic, enabling flexible and reusable views.
+
+> ✅ For this project, I mainly used the **Presenter** approach (MVP) to avoid unnecessary bindings and maintain a clear separation of concerns — keeping the `UIViewController` completely unaware of the logic behind it.  
+>  
+> ✨ A **ViewModel** version is also implemented for comparison and flexibility.
+
+---
+
+## 🏛 Architecture Overview
+
+> Architecture is not about classes, it's about **responsibilities** and **communication** between components.
+
+### 🎨 Presentation Layer
+
+#### UIKit (MVP Style)
+- **View**: Displays data passed from the controller.
+- **ViewController**: Binds data to the view and forwards events to the presenter.
+- **Presenter**: Handles logic, transforms models into view-friendly data, and triggers use cases.
+
+#### SwiftUI (MVVM Style)
+- **View**: Binds to the ViewModel using `@StateObject`.
+- **ViewModel**: Fetches and transforms data via use cases for the SwiftUI view.
+
+---
+
+### 🧠 Domain Layer
+- **Entity**: Core business models (pure Swift structs).
+- **UseCase**: Contains the business logic and operations.
+- **Repository Protocols**: Define contracts that abstract data sources (Dependency Inversion Principle).
+
+---
+
+### 💾 Data Layer
+- **Repository**: Implements domain contracts, fetching data from remote sources.
+- **RemoteDataSource**: Handles API calls and maps responses to DTOs.
+
+---
+
+### 🌐 Network Layer
+- **NetworkManager**: Handles the actual decoding of remote data into DTOs.
+- **SessionClient**: Executes HTTP requests (GET, POST, etc.) and returns raw responses.
+
+---
+
+## 🚀 Summary
+
+This project is structured to be modular, testable, and scalable. It allows switching between **UIKit (MVP)** and **SwiftUI (MVVM)** without affecting the core business logic — ensuring clean separation of concerns and improved maintainability.
+
+---
+
