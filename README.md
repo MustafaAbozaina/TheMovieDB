@@ -18,7 +18,7 @@ Based on the task requirements, the architecture is broken down into the followi
 
 ---
 
-### 🏗️ Applied Architecture Pattern: MVX-C (MVP/MVVM + Coordinator)
+### 🏗️ Applied Architecture Pattern: MVX-C (MVP/MVVM + Coordinator) 
 
 After evaluating the requirements, I found **MVX-C** (MVVM or MVP + Coordinator) to be a suitable pattern due to:
 
@@ -26,10 +26,8 @@ After evaluating the requirements, I found **MVX-C** (MVVM or MVP + Coordinator)
 - **Testability**: Makes the app easier to unit test and maintain.
 - **Coordinator Pattern**: Decouples navigation logic, enabling flexible and reusable views.
 
-> ✅ For this project, I mainly used the **Presenter** approach (MVP) to avoid unnecessary bindings and maintain a clear separation of concerns — keeping the `UIViewController` completely unaware of the logic behind it.  
+> ✅ This project demonstrates both MVP (Presenter) and MVVM (ViewModel) patterns, intentionally combined for educational purposes. The goal is to showcase architectural flexibility and highlight the practical differences between them.  
 >  
-> ✨ A **ViewModel** version is also implemented for comparison and flexibility.
-
 ---
 
 ## 🏛 Architecture Overview
